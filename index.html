@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>🙂</title>
+
+        <!-- Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&family=Roboto:wght@400;500&display=swap"
+            rel="stylesheet">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            body {
+                margin: 0;
+                font-family: 'Vazirmatn', 'Roboto', sans-serif;
+                background: linear-gradient(135deg, #1f43d6, #e0f7fa);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                padding: 10px;
+                overflow-x: hidden;
+            }
+
+            .card {
+                background: #ffffff;
+                padding: 25px 20px;
+                border-radius: 22px;
+                box-shadow: 0 12px 35px rgb(0, 0, 0);
+                text-align: center;
+                width: 100%;
+                max-width: 400px;
+                transition: transform 0.3s;
+            }
+
+            h1 {
+                margin-top: 0;
+                font-weight: 600;
+                font-size: 28px;
+                color: #302727;
+            }
+
+            .line-box {
+                margin: 12px 0;
+                padding: 14px 16px;
+                border-radius: 16px;
+                background: #dbe6f8;
+                border-left: 4px solid #4a53dd;
+                font-size: 15px;
+                color: #444;
+                font-weight: 500;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+                transition: transform 0.2s, box-shadow 0.2s;
+                text-align: center;
+            }
+
+            .line-box:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            }
+
+            .highlight {
+                font-weight: 600;
+                color: #333;
+                border-left-color: #f60035;
+                font-size: 15.5px;
+            }
+
+            .buttons {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            button {
+                margin: 6px;
+                padding: 14px 24px;
+                border: none;
+                border-radius: 16px;
+                background: #2dbd92;
+                color: white;
+                cursor: pointer;
+                font-family: 'Vazirmatn', 'Roboto', sans-serif;
+                font-weight: 500;
+                transition: 0.25s;
+            }
+
+            button:hover {
+                background: #3028c7;
+                transform: scale(1.05);
+            }
+
+            #acceptBtn {
+                font-size: 15px;
+            }
+
+            #rejectBtn {
+                font-size: 15px;
+                width: auto;
+            }
+
+            #response {
+                margin-top: 15px;
+                font-weight: 600;
+                font-size: 16px;
+                color: #333;
+            }
+
+            .confetti {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                top: -10px;
+                animation: fall 3s linear forwards;
+                border-radius: 50%;
+            }
+
+            @keyframes fall {
+                to {
+                    transform: translateY(110vh) rotate(720deg);
+                }
+            }
+
+            /* Small screens */
+            @media (max-width: 350px) {
+                h1 {
+                    font-size: 24px;
+                }
+
+                .line-box {
+                    font-size: 14px;
+                    padding: 12px 14px;
+                }
+
+                button {
+                    font-size: 14px;
+                    padding: 12px 20px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="card">
+            <h1>🙂</h1>
+
+            <div class="line-box">برات یه چیزی ساختم</div>
+            <div class="line-box highlight">😊 میدونم تازه دو روزه باهم اشنا شدیم ولی تا الان اینارو میدونم </div>
+            <div class="line-box">ما از اون چیزی که فکر می کنی بیشتر به هم شبیهیم</div>
+            <div class="line-box">صحبت کردن باهات برام ارامش بخشه</div>
+            <div class="line-box">هر موقع که نیازم داشتی من هستم</div>
+
+            <div class="buttons">
+                <button id="acceptBtn" onclick="accept()">قبول می کنم</button>
+                <button id="rejectBtn" onclick="reject()">قبول نمی کنم</button>
+            </div>
+
+            <p id="response"></p>
+        </div>
+
+        <script>
+            let rejectBtn = document.getElementById("rejectBtn");
+            let rejectCount = 0;
+
+            function reject() {
+                rejectCount++;
+                document.getElementById("response").innerText =
+                    "گزینه اشتباه...😌";
+
+                // Shrink width, height, font
+                let newWidth = 140 - rejectCount * 15;
+                let newHeight = 45 - rejectCount * 4;
+                let newFont = 15 - rejectCount * 1.5;
+
+                if (newWidth <= 0 || newHeight <= 0 || newFont <= 0) {
+                    // Completely disappear
+                    rejectBtn.style.display = "none";
+                    return;
+                }
+
+                rejectBtn.style.width = newWidth + "px";
+                rejectBtn.style.height = newHeight + "px";
+                rejectBtn.style.fontSize = newFont + "px";
+            }
+
+            function accept() {
+                document.getElementById("response").innerText =
+                    "🎉 آفرین! انتخاب درست بود 😄";
+
+                for (let i = 0; i < 120; i++) {
+                    let confetti = document.createElement("div");
+                    confetti.className = "confetti";
+                    confetti.style.left = Math.random() * window.innerWidth + "px";
+                    confetti.style.background =
+                        `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    confetti.style.animationDuration =
+                        (Math.random() * 2 + 2) + "s";
+
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3500);
+                }
+
+                // Reset reject button
+                rejectBtn.style.display = "inline-block";
+                rejectBtn.style.width = "auto";
+                rejectBtn.style.height = "auto";
+                rejectBtn.style.fontSize = "15px";
+                rejectCount = 0;
+            }
+        </script>
+
+    </body>
+
+</html>
